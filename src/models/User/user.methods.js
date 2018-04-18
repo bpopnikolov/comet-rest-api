@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const comparePassword = async function(candidatePassword) {
     /* eslint-disable no-invalid-this */

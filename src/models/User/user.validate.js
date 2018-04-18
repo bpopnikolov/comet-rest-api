@@ -5,7 +5,7 @@ const validator = require('validator');
  * eight characters, at least one uppercase letter,
  * one lowercase letter, one number and one special character:
  * @param {string} value Password value.
- * @return {boolean}
+ * @return {boolean} Returns true if password mathes pattern else false
  */
 const isPassword = (value) => {
     /* eslint-disable max-len */
@@ -17,7 +17,7 @@ const isPassword = (value) => {
 /**
  * Validates email.
  * @param {string} value Email value.
- * @return {boolean}
+ * @return {boolean} Returns true if email mathes pattern else false
  */
 const isEmail = (value) => {
     return validator.isEmail(value);
