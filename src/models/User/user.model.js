@@ -8,10 +8,8 @@ const {
 } = require('./user.validate');
 const {
     comparePassword,
-} = require('./user.methods');
-const {
     hashPassword,
-} = require('./user.middleware');
+} = require('./user.methods');
 
 const userSchema = new Schema({
     email: {
