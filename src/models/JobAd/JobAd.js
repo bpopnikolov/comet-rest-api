@@ -33,6 +33,10 @@ const jobAdSchema = new Schema({
             ref: 'Application',
         },
     }],
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('JobAd', jobAdSchema);

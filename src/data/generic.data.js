@@ -16,7 +16,9 @@ const data = (Model) => {
     };
 
     const remove = (id) => {
-        return Model.findByIdAndRemove(id).exec();
+        return Model.findByIdAndUpdate(id, {
+            isDeleted: true,
+        }).exec();
     };
 
 

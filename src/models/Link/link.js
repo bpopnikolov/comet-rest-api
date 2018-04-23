@@ -34,6 +34,10 @@ const linkSchema = new Schema({
         type: Boolean,
         required: true,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('Link', linkSchema);

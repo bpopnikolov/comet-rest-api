@@ -17,6 +17,10 @@ const contactSchema = new Schema({
     isPrimary: {
         type: Boolean,
     },
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 module.exports = mongoose.model('Contact', contactSchema);
