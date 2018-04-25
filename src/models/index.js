@@ -13,4 +13,5 @@ fs.readdirSync(__dirname)
         models[filename] = require(path.join(__dirname, filename));
     });
 
+    console.log(models);
 module.exports = models;

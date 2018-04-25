@@ -21,6 +21,9 @@ const data = (Model) => {
         }).exec();
     };
 
+    const getOne = (options) => {
+        return Model.findOne(options).exec();
+    };
 
     return {
         getAll,

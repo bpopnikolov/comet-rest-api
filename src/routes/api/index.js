@@ -10,4 +10,5 @@ const routers = fs.readdirSync(__dirname)
     // relative to absolute path
     .map((filename) => path.join(__dirname, filename));
 
-module.exports = (app) => routers.forEach((router) => app.use('/api', require(router)));
+module.exports = (app) => routers.forEach(
+    (router) => app.use('/api', require(router)));

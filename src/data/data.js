@@ -10,10 +10,10 @@ const {
 const data = require('./generic.data');
 
 module.exports = {
-    applicationData: data(Application),
-    categoryData: data(Category),
-    contactData: data(Contact),
-    jobAdData: data(JobAd),
-    linkData: data(Link),
-    userData: data(User),
+    application: data(Application),
+    category: data(Category),
+    contact: data(Contact),
+    jobAd: data(JobAd),
+    link: data(Link),
+    user: data(User),
 };
