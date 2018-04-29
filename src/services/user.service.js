@@ -20,7 +20,7 @@ const userService = (data, config) => {
 
 
     const getUserById = (id) => {
-        return data.user.getUserById(id);
+        return data.user.getById(id);
     };
 
     const getUser = (options) => {

@@ -1,1 +1,1 @@
-module.exports = require('./JobAd');
+module.exports = require('./JobAd.model');

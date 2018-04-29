@@ -5,7 +5,8 @@ const localStrategy = (options, UserService) => {
         const user = await UserService.getUser({
             email,
         });
-
+        console.log(email);
+        console.log(user);
         if (!user) {
             return done(null, null);
         }

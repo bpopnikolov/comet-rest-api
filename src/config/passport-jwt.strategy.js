@@ -2,8 +2,10 @@ const JwtStrategy = require('passport-jwt').Strategy;
 
 const jwtStrategy = (options, UserService) => {
     return new JwtStrategy(options, async (payload, done) => {
-        const user = await UserService.findUserById(payload.user._id);
-        console.log(user.email);
+        console.log(payload);
+        const user = await UserService.getUserById(payload.user.id);
+        console.log('from DB');
+        console.log(user);
 
         if (!user) {
             console.log('didnt find user');

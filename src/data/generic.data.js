@@ -1,6 +1,6 @@
 const data = (Model) => {
     const getAll = () => {
-        return Model.find().exec();
+        return Model.find();
     };
 
     const getById = (id) => {

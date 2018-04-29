@@ -1,1 +1,1 @@
-module.exports = require('./contact');
+module.exports = require('./contact.model');

@@ -1,1 +1,1 @@
-module.exports = require('./category');
+module.exports = require('./category.model');

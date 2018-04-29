@@ -27,12 +27,12 @@ const linkSchema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['Active', 'Inactive'],
-        default: 'Active',
+        enum: ['active', 'inactive'],
+        default: 'active',
     },
     isHidden: {
         type: Boolean,
-        required: true,
+        default: false,
     },
     isDeleted: {
         type: Boolean,
