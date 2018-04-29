@@ -7,6 +7,7 @@ const logger = require('morgan');
 const path = require('path');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 const config = require('../config');
 const {
@@ -21,6 +22,10 @@ const {
 // routes
 
 const app = express();
+
+mongoose.connect(config.db.mongo.uri);
+const mc = mongoose.connection;
+mc.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require('./routes/api')(app);
 
 // config passport
+
 passport.use(passportLocalStrategy({
     usernameField: 'email',
 }, UserService));

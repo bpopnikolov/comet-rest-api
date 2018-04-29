@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
-
 const {
     isPassword,
     isEmail,
@@ -29,9 +28,11 @@ const userSchema = new Schema({
             msg: 'Invalid password.',
         }],
     },
-    privilege: {
-        type: Schema.Types.ObjectId,
-        ref: 'Privilige',
+    role: {
+        type: String,
+        required: true,
+        enum: ['user', 'admin'],
+        default: 'user',
     },
     jobsApplied: [{
         jobAd: {
@@ -52,10 +53,12 @@ userSchema.pre('save', async function() {
     /* eslint-disable no-invalid-this */
     const user = this;
     /* eslint-enable no-invalid-this */
+    const SALT_FACTOR = 10;
+
     if (!user.isModified('password')) {
         return;
     }
-    user.password = await hashPassword(user);
+    user.password = await hashPassword(user.password, SALT_FACTOR);
 });
 
 /**

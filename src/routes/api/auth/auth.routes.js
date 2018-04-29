@@ -1,33 +1,66 @@
+const passport = require('passport');
 
+const {
+    helpers,
+} = require('../../../helpers');
 
-const safeHandler = (handler) => async (req, res, next) => {
-    try {
-        await handler(req, res, next);
-    } catch (error) {
-        next(error, req, res, next);
-    }
-};
-
-
-
-module.exports.getAll = {
+module.exports.login = {
     method: 'post',
     path: '/auth/login',
-    middlewares: [
-    ],
-    handler: ({ usersService }) => async (req, res, next) => {
-        const { page, count } = req.query;
-        res.json('IT ALL USERS');
-    },
+    middlewares: [passport.authenticate('local', {
+        session: false,
+    })],
+    handler: ({
+        UserService,
+    }) => helpers.safeHandler(async (req, res, next) => {
+        const user = req.user;
+        const token = UserService.login(user);
+        if (token) {
+            return res.status(200).json({
+                token,
+            });
+        }
+        return res.status(401).json({
+            error: 'Login failed',
+        });
+    }),
 };
 
-module.exports.getById = {
+module.exports.register = {
     method: 'post',
     path: '/auth/register',
-    middlewares: [
-    ],
-    handler: ({ usersService }) => safeHandler(async (req, res, next) => {
-        const { id } = req.params;
-        res.json('IT WORKS');
+    middlewares: [],
+    handler: ({
+        UserService,
+    }) => helpers.safeHandler(async (req, res, next) => {
+        console.log('register');
+        const {
+            email,
+            password,
+        } = req.body;
+        console.log(email, password);
+
+        if (!email) {
+            return res.status(422).send({
+                error: 'You must enter an email address',
+            });
+        }
+
+        if (!password) {
+            return res.status(422).send({
+                error: 'You must enter a password',
+            });
+        }
+        const user = await UserService.register(email, password);
+
+        if (!user) {
+            return res.status(422).send({
+                error: 'That email address is already in use',
+            });
+        }
+
+        return res.status(201).send({
+            msg: 'The registration was successful',
+        });
     }),
 };

@@ -1,13 +1,6 @@
-
-
-const safeHandler = (handler) => async (req, res, next) => {
-    try {
-        await handler(req, res, next);
-    } catch (error) {
-        next(error, req, res, next);
-    }
-};
-
+const {
+    helpers,
+} = require('../../../helpers');
 // const paginationMiddleware = ({ pageLimits, countLimit }) => () => (req, res) => {
 //     const page = Math.max(pageLimits.min, Math.min(pageLimits.max, req.query.page));
 
@@ -21,10 +14,11 @@ module.exports.getAll = {
     middlewares: [
         // paginationMiddleware({ pageLimits: { max: 10, min: 0 } }),
     ],
-    handler: ({ usersService }) => async (req, res, next) => {
-        const { page, count } = req.query;
-        res.json('IT ALL USERS');
-    },
+    handler: ({
+        UsersService,
+    }) => helpers.safeHandler(async (req, res, next) => {
+        console.log('users');
+    }),
 };
 
 module.exports.getById = {
@@ -33,9 +27,9 @@ module.exports.getById = {
     middlewares: [
         // paginationMiddleware({ pageLimits: { max: 6, min: 2 } }),
     ],
-    handler: ({ usersService }) => safeHandler(async (req, res, next) => {
-        const { id } = req.params;
-        console.log('asdasd');
-        res.json('IT WORKS');
+    handler: ({
+        UsersService,
+    }) => helpers.safeHandler(async (req, res, next) => {
+        console.log('user');
     }),
 };

@@ -7,8 +7,9 @@ const data = (Model) => {
         return Model.findById(id).exec();
     };
 
-    const create = (obj) => {
-        Model.create(obj);
+    const create = async (obj) => {
+        // const user = new Model(obj);
+        return Model.create(obj);
     };
 
     const update = (id, query) => {
@@ -22,12 +23,13 @@ const data = (Model) => {
     };
 
     const getOne = (options) => {
-        return Model.findOne(options).exec();
+        return Model.findOne(options);
     };
 
     return {
         getAll,
         getById,
+        getOne,
         create,
         update,
         remove,

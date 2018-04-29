@@ -7,17 +7,13 @@ const localStrategy = (options, UserService) => {
         });
 
         if (!user) {
-            return done(null, null, {
-                error: 'Login failed. Please try again.',
-            });
+            return done(null, null);
         }
 
-        const isMatch = user.comparePassword(password);
+        const isMatch = await user.comparePassword(password);
 
         if (!isMatch) {
-            return done(null, null, {
-                error: 'Login failed. Please try again.',
-            });
+            return done(null, null);
         }
 
         return done(null, user);
