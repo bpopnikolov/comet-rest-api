@@ -12,26 +12,31 @@ const seedLniks = async () => {
         name: 'Google Search',
         target: `https://www.google.bg/`,
         icon: 'home',
-        type: 'active',
+        type: 'action',
     }, {
         name: 'Go to Youtube',
         target: `https://www.youtube.com/`,
         icon: 'home',
-        type: 'active',
+        type: 'action',
     }, {
         name: 'Sign Up Now',
         target: `https://www.google.bg/`,
         icon: 'home',
-        type: 'active',
+        type: 'action',
     }, {
-        name: 'Sign In',
-        target: `https://www.google.bg/`,
+        name: 'facebook',
+        target: `https://www.facebook.com/`,
         icon: 'home',
-        type: 'active',
+        type: 'social',
+    }, {
+        name: 'twitter',
+        target: `https://twitter.com/`,
+        icon: 'home',
+        type: 'social',
     }];
 
-    return Link.insertMany(data);
+    return await Link.insertMany(data);
 };
 
+seedLniks();
 module.exports = seedLniks;
-
