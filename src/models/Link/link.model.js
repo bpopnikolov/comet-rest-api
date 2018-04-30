@@ -27,8 +27,8 @@ const linkSchema = new Schema({
     type: {
         type: String,
         required: true,
-        enum: ['active', 'inactive'],
-        default: 'active',
+        enum: ['social', 'action'],
+        default: 'social',
     },
     isHidden: {
         type: Boolean,

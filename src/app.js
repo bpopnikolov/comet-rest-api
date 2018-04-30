@@ -49,7 +49,7 @@ passport.use(passportLocalStrategy({
     usernameField: 'email',
 }, UserService));
 passport.use(passportJWTStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
     secretOrKey: config.passport.secret,
 }, UserService));
 app.use(passport.initialize());
