@@ -1,22 +1,38 @@
 const jobadsService = (data, config) => {
     const getJobAds = async () => {
-        const filteredDeletedAds = (await data.jobad.getAll()).filter((x) => !x.isDeleted);
+        const filteredDeletedAds = (await data.jobad.getAll({}, ['category']))
+            .filter((x) => !x.deleted);
         return filteredDeletedAds;
     };
 
-    const createJobAd = (jobAd) => {
+    const createJobAd = async (jobAd) => {
         jobAd.usersApplied = [];
+        const category = await data.category.getOne({
+            name: jobAd.category,
+        });
+
+        jobAd.category = category;
+
         return data.jobad.create(jobAd);
     };
 
-    const updateJobAd = (id, jobAd) => {
-        return data.jobad.update(id, jobAd);
+    const updateJobAd = async (id, jobAd) => {
+        const category = await data.category.getOne({
+            name: jobAd.category,
+        });
+
+        jobAd.category = category;
+
+        return data.jobad.update(id, jobAd, ['category']);
     };
 
     const deleteJobAd = async (id) => {
-        console.log(id);
-        const isDeleted = (await data.jobad.remove(id)).isDeleted;
-        return isDeleted;
+
+        const deletedObj = (await data.jobad.remove(id));
+
+        console.log(deletedObj);
+
+        return deletedObj ? deletedObj.deleted : false;
     };
 
     return {

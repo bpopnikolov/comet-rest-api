@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongooseDelete = require('mongoose-delete');
 
 const jobAdSchema = new Schema({
     title: {
@@ -15,7 +16,8 @@ const jobAdSchema = new Schema({
         maxlength: 16384,
     },
     category: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
         required: true,
     },
     status: {
@@ -33,10 +35,10 @@ const jobAdSchema = new Schema({
             ref: 'Application',
         },
     }],
-    isDeleted: {
-        type: Boolean,
-        default: false,
-    },
-});
+}, {
+    timestamps: true,
+    });
+
+jobAdSchema.plugin(mongooseDelete);
 
 module.exports = mongoose.model('JobAd', jobAdSchema);

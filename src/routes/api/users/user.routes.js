@@ -17,7 +17,8 @@ module.exports.getAll = {
     handler: ({
         UserService,
     }) => helpers.safeHandler(async (req, res, next) => {
-        console.log('users');
+        const users = await UserService.getUsers();
+        res.status(200).json(users);
     }),
 };
 
@@ -30,6 +31,6 @@ module.exports.getById = {
     handler: ({
         UserService,
     }) => helpers.safeHandler(async (req, res, next) => {
-        console.log('user');
+        res.status(200).json([]);
     }),
 };

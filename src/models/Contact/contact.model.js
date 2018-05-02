@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const mongooseDelete = require('mongoose-delete');
 
 const {
     isEmail,
@@ -32,10 +33,10 @@ const contactSchema = new Schema({
         type: Boolean,
         default: false,
     },
-    isDeleted: {
-        type: Boolean,
-        default: false,
-    },
+}, {
+    timestamps: true,
 });
+
+contactSchema.plugin(mongooseDelete);
 
 module.exports = mongoose.model('Contact', contactSchema);

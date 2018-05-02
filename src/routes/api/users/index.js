@@ -9,8 +9,9 @@ const {
 
 const router = new Router();
 
+
 Object.values(userRoutes).forEach((route) => {
-    router[route.method](route.path, route.handler(UserService));
+    router[route.method](route.path, route.handler({ UserService }));
 });
 
 

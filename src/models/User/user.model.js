@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const uniqueValidator = require('mongoose-unique-validator');
+const mongooseDelete = require('mongoose-delete');
+
 const {
     isPassword,
     isEmail,
@@ -44,6 +46,8 @@ const userSchema = new Schema({
             ref: 'Application',
         },
     }],
+}, {
+    timestamps: true,
 });
 
 /**
@@ -70,5 +74,6 @@ userSchema.methods.comparePassword = comparePassword;
  * Plugins.
  */
 userSchema.plugin(uniqueValidator);
+userSchema.plugin(mongooseDelete);
 
 module.exports = mongoose.model('User', userSchema);

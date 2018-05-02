@@ -23,6 +23,11 @@ const userService = (data, config) => {
         return data.user.getById(id);
     };
 
+    const getUsers = async () => {
+        const filteredDeletedUsers = (await data.user.getAll()).filter((x)=> !x.deleted);
+        return filteredDeletedUsers;
+    };
+
     const getUser = (options) => {
         return data.user.getOne(options);
     };
@@ -40,7 +45,7 @@ const userService = (data, config) => {
         if (userExcists) {
             return null;
         }
-        console.log(userExcists);
+
         const user = await data.user.create({
             email,
             password,
@@ -52,6 +57,7 @@ const userService = (data, config) => {
     return {
         getUser,
         getUserById,
+        getUsers,
         login,
         register,
     };
