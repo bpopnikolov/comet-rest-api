@@ -4,22 +4,25 @@ const data = (Model) => {
     };
 
     const getById = (id) => {
-        return Model.findById(id).exec();
+        return Model.findById(id);
     };
 
     const create = async (obj) => {
-        // const user = new Model(obj);
         return Model.create(obj);
     };
 
     const update = (id, query) => {
-        return Model.findByIdAndUpdate(id, query).exec();
+        return Model.findByIdAndUpdate(id, query, {
+            'new': true,
+        });
     };
 
     const remove = (id) => {
         return Model.findByIdAndUpdate(id, {
             isDeleted: true,
-        }).exec();
+        }, {
+            'new': true,
+        });
     };
 
     const getOne = (options) => {

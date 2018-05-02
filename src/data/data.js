@@ -13,7 +13,7 @@ module.exports = {
     application: data(Application),
     category: data(Category),
     contact: data(Contact),
-    jobAd: data(JobAd),
+    jobad: data(JobAd),
     link: data(Link),
     user: data(User),
 };

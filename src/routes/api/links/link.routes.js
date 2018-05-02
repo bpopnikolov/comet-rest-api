@@ -2,6 +2,12 @@ const {
     helpers,
 } = require('../../../helpers');
 
+const passport = require('passport');
+
+const requireToken = passport.authenticate('jwt', {
+    session: false,
+});
+
 module.exports.getAll = {
     method: 'get',
     path: '/links',
@@ -9,10 +15,7 @@ module.exports.getAll = {
     handler: ({
         LinkService,
     }) => helpers.safeHandler(async (req, res, next) => {
-        console.log('before links get');
-        console.log(LinkService);
         const links = await LinkService.getLinks();
-        console.log('in route');
         return res.status(200).json(links);
     }),
 };

@@ -9,7 +9,7 @@ const categorySchema = new Schema({
         unique: true,
         minlength: 3,
         maxlength: 24,
-    }
+    },
 });
 
 categorySchema.plugin(uniqueValidator);
