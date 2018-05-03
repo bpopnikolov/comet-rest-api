@@ -27,7 +27,6 @@ const jobadsService = (data, config) => {
     };
 
     const deleteJobAd = async (id) => {
-
         const deletedObj = (await data.jobad.remove(id));
 
         console.log(deletedObj);

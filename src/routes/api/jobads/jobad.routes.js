@@ -40,7 +40,7 @@ module.exports.create = {
     }),
 };
 
-module.exports.update = {
+module.exports.updateJobAd = {
     method: 'post',
     path: '/jobads/update/:id',
     middlewares: [],
@@ -64,7 +64,7 @@ module.exports.update = {
     }),
 };
 
-module.exports.delete = {
+module.exports.deleteJobAd = {
     method: 'delete',
     path: '/jobads/delete/:id',
     middlewares: [],

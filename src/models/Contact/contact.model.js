@@ -19,6 +19,9 @@ const contactSchema = new Schema({
         minlength: 2,
         maxlength: 1024,
     },
+    icon: {
+        type: String,
+    },
     email: {
         type: String,
         validate: [{
