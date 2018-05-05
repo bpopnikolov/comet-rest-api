@@ -3,9 +3,9 @@ const {
     Router,
 } = express;
 
-const linksRoutes = require('./link.routes');
+const jobApplicationRoutes = require('./jobApplication.routes');
 const {
-    LinkService,
+    JobApplicationService,
 } = require('../../../services');
 
 const {
@@ -14,11 +14,11 @@ const {
 
 const router = new Router();
 
-Object.values(linksRoutes).forEach((route) => {
+Object.values(jobApplicationRoutes).forEach((route) => {
     router[route.method](
         route.path, [middlewares.isAdminMiddleware],
         route.handler({
-            LinkService,
+            JobApplicationService,
         }));
 });
 

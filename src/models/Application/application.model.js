@@ -7,7 +7,7 @@ const {
 } = require('./application.validate');
 
 const applicationSchema = new Schema({
-    firstName: {
+    firstname: {
         type: String,
         required: true,
         minlength: 3,
@@ -17,7 +17,7 @@ const applicationSchema = new Schema({
             msg: 'Invalid first name',
         }],
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true,
         minlength: 3,
@@ -32,11 +32,11 @@ const applicationSchema = new Schema({
         minlength: 0,
         maxlength: 1024,
     },
-    CV: {
+    cv: {
         type: String,
         required: true,
     },
-    CL: {
+    cl: {
         type: String,
         required: true,
     },

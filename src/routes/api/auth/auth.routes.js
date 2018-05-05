@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 const {
-    helpers,
+    middlewares,
 } = require('../../../helpers');
 
 module.exports.login = {
@@ -12,7 +12,7 @@ module.exports.login = {
     })],
     handler: ({
         UserService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const user = req.user;
         const token = UserService.login(user);
         if (token) {
@@ -32,7 +32,7 @@ module.exports.register = {
     middlewares: [],
     handler: ({
         UserService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         console.log('register');
         const {
             email,

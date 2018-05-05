@@ -1,12 +1,7 @@
 const {
-    helpers,
+    middlewares,
 } = require('../../../helpers');
 
-const passport = require('passport');
-
-const requireToken = passport.authenticate('jwt', {
-    session: false,
-});
 
 module.exports.getAll = {
     method: 'get',
@@ -14,8 +9,7 @@ module.exports.getAll = {
     middlewares: [],
     handler: ({
         JobadService,
-    }) => helpers.safeHandler(async (req, res, next) => {
-        console.log(req.path);
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const jobads = await JobadService.getJobAds();
         return res.status(200).json(jobads);
     }),
@@ -27,7 +21,7 @@ module.exports.create = {
     middlewares: [],
     handler: ({
         JobadService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const jobAd = req.body;
         const createdAd = await JobadService.createJobAd(jobAd);
 
@@ -46,7 +40,7 @@ module.exports.updateJobAd = {
     middlewares: [],
     handler: ({
         JobadService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const jobAd = req.body;
         const id = req.params.id;
 
@@ -70,7 +64,7 @@ module.exports.deleteJobAd = {
     middlewares: [],
     handler: ({
         JobadService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const id = req.params.id;
         console.log('req', id);
         const deleted = await JobadService.deleteJobAd(id);

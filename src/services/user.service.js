@@ -24,7 +24,8 @@ const userService = (data, config) => {
     };
 
     const getUsers = async () => {
-        const filteredDeletedUsers = (await data.user.getAll()).filter((x)=> !x.deleted);
+        const filteredDeletedUsers = (await data.user.getAll({}, ['jobsApplied.jobAd']))
+            .filter((x) => !x.deleted);
         return filteredDeletedUsers;
     };
 

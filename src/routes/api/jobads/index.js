@@ -2,7 +2,6 @@ const express = require('express');
 const {
     Router,
 } = express;
-const passport = require('passport');
 
 const jobadsRoutes = require('./jobad.routes');
 const {
@@ -12,32 +11,13 @@ const {
 
 const router = new Router();
 
-
-const isAdminMiddleware = (req, res, next) => {
-    if (req.method === 'GET') {
-        return next();
-    }
-
-    passport.authenticate('jwt', {
-        session: false,
-    }, (err, user, authError) => {
-        console.log('ADMIN MIDDLEWARE');
-        if (user) {
-            if (user.role === 'admin') {
-                console.log('IS ADMIN');
-                return next();
-            }
-        }
-        console.log('IS NOT ADMIN');
-        return res.status(401).json('Unauthorized');
-    })(req, res, next);
-
-    return null;
-};
+const {
+    middlewares,
+} = require('../../../helpers');
 
 Object.values(jobadsRoutes).forEach((route) => {
     router[route.method](
-        route.path, [isAdminMiddleware],
+        route.path, [middlewares.isAdminMiddleware],
         route.handler({
             JobadService,
         }));
