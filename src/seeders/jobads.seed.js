@@ -10,10 +10,21 @@ mongoose.connect(config.db.mongo.uri);
 
 
 const jobadsLinks = async () => {
-
     const allCategories = await Category.find();
 
     const data = [{
+            title: 'chalga_queen',
+            desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et tellus rhoncus, tincidunt diam nec, cursus dui. Etiam ultrices dapibus magna. Phasellus ac mi nec massa rhoncus commodo. Morbi auctor ex mauris, non dapibus eros vehicula vitae. Etiam ac libero purus. Duis ac nunc ultricies, porta nibh in, dictum orci. Praesent non magna sollicitudin, mattis sem vel, suscipit massa. Nullam tempus dolor non urna iaculis, a venenatis justo posuere. Maecenas id quam sed leo pharetra ornare. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`,
+            category: allCategories.find((x) => x.name === 'Other'),
+            userApplied: [],
+        },
+        {
+            title: 'chalga_boK',
+            desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et tellus rhoncus, tincidunt diam nec, cursus dui. Etiam ultrices dapibus magna. Phasellus ac mi nec massa rhoncus commodo. Morbi auctor ex mauris, non dapibus eros vehicula vitae. Etiam ac libero purus. Duis ac nunc ultricies, porta nibh in, dictum orci. Praesent non magna sollicitudin, mattis sem vel, suscipit massa. Nullam tempus dolor non urna iaculis, a venenatis justo posuere. Maecenas id quam sed leo pharetra ornare. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`,
+            category: allCategories.find((x) => x.name === 'Other'),
+            userApplied: [],
+        },
+        {
             title: 'Mean Stack Developer',
             desc: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis et tellus rhoncus, tincidunt diam nec, cursus dui. Etiam ultrices dapibus magna. Phasellus ac mi nec massa rhoncus commodo. Morbi auctor ex mauris, non dapibus eros vehicula vitae. Etiam ac libero purus. Duis ac nunc ultricies, porta nibh in, dictum orci. Praesent non magna sollicitudin, mattis sem vel, suscipit massa. Nullam tempus dolor non urna iaculis, a venenatis justo posuere. Maecenas id quam sed leo pharetra ornare. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`,
             category: allCategories.find((x) => x.name === 'IT'),
