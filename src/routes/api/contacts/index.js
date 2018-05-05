@@ -8,11 +8,15 @@ const {
     ContactService,
 } = require('../../../services');
 
+const {
+    middlewares,
+} = require('../../../helpers');
+
 const router = new Router();
 
 Object.values(contactsRoutes).forEach((route) => {
     router[route.method](
-        route.path,
+        route.path, [middlewares.isAdminMiddleware],
         route.handler({
             ContactService,
         }));

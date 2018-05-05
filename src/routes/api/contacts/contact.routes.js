@@ -1,12 +1,6 @@
 const {
-    helpers,
+    middlewares,
 } = require('../../../helpers');
-
-const passport = require('passport');
-
-const requireToken = passport.authenticate('jwt', {
-    session: false,
-});
 
 module.exports.getAll = {
     method: 'get',
@@ -14,7 +8,7 @@ module.exports.getAll = {
     middlewares: [],
     handler: ({
         ContactService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const contacts = await ContactService.getContacts();
 
         res.status(200).json(contacts);
@@ -27,7 +21,7 @@ module.exports.createContact = {
     middlewares: [],
     handler: ({
         ContactService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const obj = req.body;
         console.log(obj);
         const contact = await ContactService.createContact(obj);
@@ -42,7 +36,7 @@ module.exports.updateContact = {
     middlewares: [],
     handler: ({
         ContactService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const id = req.params.id;
         const contact = req.body;
 
@@ -58,7 +52,7 @@ module.exports.deleteContact = {
     middlewares: [],
     handler: ({
         ContactService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const id = req.params.id;
         console.log('req', id);
         const deleted = await ContactService.deleteContact(id);

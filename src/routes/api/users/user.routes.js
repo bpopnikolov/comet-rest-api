@@ -1,12 +1,6 @@
 const {
-    helpers,
+    middlewares,
 } = require('../../../helpers');
-// const paginationMiddleware = ({ pageLimits, countLimit }) => () => (req, res) => {
-//     const page = Math.max(pageLimits.min, Math.min(pageLimits.max, req.query.page));
-
-//     req.page = page;
-//     req.count = count;
-// }
 
 module.exports.getAll = {
     method: 'get',
@@ -16,7 +10,7 @@ module.exports.getAll = {
     ],
     handler: ({
         UserService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const users = await UserService.getUsers();
         res.status(200).json(users);
     }),
@@ -30,7 +24,7 @@ module.exports.getById = {
     ],
     handler: ({
         UserService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         res.status(200).json([]);
     }),
 };
