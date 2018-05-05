@@ -1,6 +1,7 @@
 const {
-    helpers,
+    middlewares,
 } = require('../../../helpers');
+
 
 const passport = require('passport');
 
@@ -14,7 +15,7 @@ module.exports.getAll = {
     middlewares: [],
     handler: ({
         CategoryService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const categories = await CategoryService.getCategories();
 
         res.status(200).json(categories);

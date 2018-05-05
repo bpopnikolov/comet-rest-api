@@ -83,7 +83,7 @@ module.exports.getById = {
     middlewares: [],
     handler: ({
         JobadService,
-    }) => helpers.safeHandler(async (req, res, next) => {
+    }) => middlewares.safeHandler(async (req, res, next) => {
         const id = req.params.id;
         console.log('req', id);
         const jobad = await JobadService.getById(id);
