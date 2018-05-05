@@ -3,6 +3,10 @@ const {
     Router,
 } = express;
 
+const {
+    middlewares,
+} = require('../../../helpers');
+
 const categoriesRoutes = require('./category.routes');
 const {
     CategoryService,
@@ -12,7 +16,7 @@ const router = new Router();
 
 Object.values(categoriesRoutes).forEach((route) => {
     router[route.method](
-        route.path,
+        route.path, [middlewares.isAdminMiddleware],
         route.handler({
             CategoryService,
         }));

@@ -11,7 +11,7 @@ const multerConfig = require('../../config').multer;
 const isAdminMiddleware = (req, res, next) => {
     const forbidenEndpoints = new Set(['/applications', '/users']);
     const allowedEndpoints = new Set(['/applications', '/auth']);
-    const publicEndpoints = new Set(['/contacts', '/links', '/jobads', '/auth']);
+    const publicEndpoints = new Set(['/contacts', '/links', '/jobads', '/auth', '/categories']);
 
     console.log(req.path);
     passport.authenticate('jwt', {
