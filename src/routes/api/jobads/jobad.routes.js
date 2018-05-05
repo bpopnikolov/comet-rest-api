@@ -82,3 +82,17 @@ module.exports.deleteJobAd = {
         });
     }),
 };
+
+module.exports.getById = {
+    method: 'get',
+    path: '/jobads/:id',
+    middlewares: [],
+    handler: ({
+        JobadService,
+    }) => helpers.safeHandler(async (req, res, next) => {
+        const id = req.params.id;
+        console.log('req', id);
+        const jobad = await JobadService.getById(id);
+        return res.status(200).json(jobad);
+    }),
+};

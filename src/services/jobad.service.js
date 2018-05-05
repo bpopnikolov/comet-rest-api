@@ -34,11 +34,19 @@ const jobadsService = (data, config) => {
         return deletedObj ? deletedObj.deleted : false;
     };
 
+    const getById = async (id) => {
+        const jobAd = await data.jobad.getById(id, ['category']);
+        console.log(jobAd);
+        return jobAd;
+    };
+
+
     return {
         getJobAds,
         createJobAd,
         updateJobAd,
         deleteJobAd,
+        getById,
     };
 };
 
