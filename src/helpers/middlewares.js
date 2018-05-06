@@ -76,7 +76,8 @@ const safeHandler = (handler) => async (req, res, next) => {
     try {
         await handler(req, res, next);
     } catch (error) {
-        next(error, req, res, next);
+        res.status(500).json(error.message);
+        // next(error.msg, req, res, next);
     }
 };
 

@@ -35,9 +35,7 @@ const jobadsService = (data, config) => {
     };
 
     const getById = async (id) => {
-        const jobAd = await data.jobad.getById(id, ['category']);
-        console.log(jobAd);
-        return jobAd;
+        return data.jobad.getById(id, ['category']);
     };
 
 

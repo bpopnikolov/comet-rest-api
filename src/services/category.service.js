@@ -1,8 +1,9 @@
-const categoryService = (data, config) => {
+const categoryService = async (data, config) => {
     const getCategories = async () => {
-        const allCategories = await data.category.getAll();
-        return allCategories;
-    }
+        const filteredDeletedCategories = (await data.category.getAll())
+            .filter((x) => !x.deleted);
+        return filteredDeletedCategories;
+    };
 
     return {
         getCategories,
