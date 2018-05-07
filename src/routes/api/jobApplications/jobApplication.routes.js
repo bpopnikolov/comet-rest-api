@@ -26,7 +26,7 @@ module.exports.createApplication = {
     }) => middlewares.safeHandler(async (req, res, next) => {
         const obj = req.body;
         obj.cv = req.files.cv[0].filename;
-        obj.cl = req.files.cl[0].filename;
+        obj.cl = req.files.length > 1 ? req.files.cl[0].filename : null;
         obj.user = req.user;
         const application = await JobApplicationService.createJobApplication(obj);
         res.status(200).json(application);

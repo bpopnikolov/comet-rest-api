@@ -40,9 +40,9 @@ module.exports.updateLink = {
         const id = req.params.id;
         const link = req.body;
 
-        link = await LinkService.updateLink(id, link);
+        const updatedLink = await LinkService.updateLink(id, link);
 
-        res.status(200).json(link);
+        res.status(200).json(updatedLink);
     }),
 };
 

@@ -38,7 +38,6 @@ const applicationSchema = new Schema({
     },
     cl: {
         type: String,
-        required: true,
     },
     user: {
         type: Schema.Types.ObjectId,
