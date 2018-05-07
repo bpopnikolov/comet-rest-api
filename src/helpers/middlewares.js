@@ -16,8 +16,11 @@ const isAdminMiddleware = (req, res, next) => {
     passport.authenticate('jwt', {
         session: false,
     }, (err, user, authError) => {
-        if (req.method === 'GET' && publicEndpoints.has(req.path)) {
-            return next();
+        for (const endpoint of publicEndpoints) {
+            if (req.path.toLocaleLowerCase().includes(endpoint.toLocaleLowerCase())) {
+
+                return next();
+            }
         }
         // console.log(user);
         req.user = user;
