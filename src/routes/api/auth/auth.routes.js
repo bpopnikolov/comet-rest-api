@@ -14,7 +14,12 @@ module.exports.login = {
         UserService,
     }) => middlewares.safeHandler(async (req, res, next) => {
         const user = req.user;
-        const token = UserService.login(user);
+        let token = null;
+
+        if (user) {
+            token = UserService.login(user);
+        }
+
         if (token) {
             return res.status(200).json({
                 token,
@@ -33,12 +38,10 @@ module.exports.register = {
     handler: ({
         UserService,
     }) => middlewares.safeHandler(async (req, res, next) => {
-        console.log('register');
         const {
             email,
             password,
         } = req.body;
-        console.log(email, password);
 
         if (!email) {
             return res.status(422).send({
@@ -53,14 +56,19 @@ module.exports.register = {
         }
         const user = await UserService.register(email, password);
 
+
         if (!user) {
             return res.status(422).send({
                 error: 'That email address is already in use',
             });
         }
 
+        const userInfo = UserService.setUserInfo(user);
+        const token = UserService.generateToken(userInfo);
+
         return res.status(201).send({
             msg: 'The registration was successful',
+            token,
         });
     }),
 };

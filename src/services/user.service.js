@@ -52,6 +52,7 @@ const userService = (data, config) => {
             password,
         });
 
+
         return user;
     };
 
@@ -61,6 +62,8 @@ const userService = (data, config) => {
         getUsers,
         login,
         register,
+        setUserInfo,
+        generateToken,
     };
 };
 
