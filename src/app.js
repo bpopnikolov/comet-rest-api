@@ -19,8 +19,6 @@ const {
     UserService,
 } = require('./services');
 
-// routes
-
 const app = express();
 
 mongoose.connect(config.db.mongo.uri);
@@ -35,12 +33,11 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
-    extended: false,
+    extended: true,
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// set routes
 require('./routes/api')(app);
 
 // config passport

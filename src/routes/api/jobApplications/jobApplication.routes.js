@@ -1,6 +1,9 @@
+/* globals __dirname, Set*/
+const path = require('path');
 const {
     middlewares,
 } = require('../../../helpers');
+
 
 module.exports.getAll = {
     method: 'get',
@@ -22,9 +25,10 @@ module.exports.createApplication = {
         JobApplicationService,
     }) => middlewares.safeHandler(async (req, res, next) => {
         const obj = req.body;
-        console.log(obj);
+        obj.cv = req.files.cv[0].filename;
+        obj.cl = req.files.cl[0].filename;
+        obj.user = req.user;
         const application = await JobApplicationService.createJobApplication(obj);
-        console.log(application);
         res.status(200).json(application);
     }),
 };
@@ -39,7 +43,7 @@ module.exports.deleteContact = {
     }) => middlewares.safeHandler(async (req, res, next) => {
         const id = req.params.id;
         console.log('req', id);
-        const deleted = await JobApplicationService.deleteContact(id);
+        const deleted = await JobApplicationService.deleteApplication(id);
         if (deleted) {
             return res.status(200).json(deleted);
         }

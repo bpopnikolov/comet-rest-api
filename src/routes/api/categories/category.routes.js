@@ -11,7 +11,6 @@ module.exports.getAll = {
     handler: ({
         CategoryService,
     }) => middlewares.safeHandler(async (req, res, next) => {
-        console.log(CategoryService);
         const categories = await CategoryService.getCategories();
 
         res.status(200).json(categories);

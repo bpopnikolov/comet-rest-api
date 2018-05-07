@@ -12,11 +12,12 @@ const {
     middlewares,
 } = require('../../../helpers');
 
+
 const router = new Router();
 
 Object.values(jobApplicationRoutes).forEach((route) => {
     router[route.method](
-        route.path, [middlewares.isAdminMiddleware],
+        route.path, [middlewares.isAdminMiddleware, middlewares.uploadFileMiddleware()],
         route.handler({
             JobApplicationService,
         }));

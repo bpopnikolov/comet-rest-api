@@ -13,14 +13,14 @@ const isAdminMiddleware = (req, res, next) => {
     const allowedEndpoints = new Set(['/applications', '/auth']);
     const publicEndpoints = new Set(['/contacts', '/links', '/jobads', '/auth', '/categories']);
 
-    console.log(req.path);
     passport.authenticate('jwt', {
         session: false,
     }, (err, user, authError) => {
         if (req.method === 'GET' && publicEndpoints.has(req.path)) {
             return next();
         }
-
+        // console.log(user);
+        req.user = user;
         if (user) {
             console.log(user.email);
             console.log(user.role);
@@ -54,9 +54,8 @@ const isAdminMiddleware = (req, res, next) => {
 
 const uploadFileMiddleware = () => {
     const storage = multer.diskStorage({
-        destination: async function(req, file, cb) {
-            // console.log(file);
-            cb(null, path.join(__dirname, multerConfig.dest, req.user._id));
+        destination: function(req, file, cb) {
+            cb(null, path.join(__dirname, '../uploads/'));
         },
         filename: async function(req, file, cb) {
             const hash = await generateFilenameHash(file);
@@ -69,7 +68,17 @@ const uploadFileMiddleware = () => {
         storage: storage,
     });
 
-    return upload;
+    const uploadFields = upload.fields([{
+            name: 'cv',
+            maxCount: 1,
+        },
+        {
+            name: 'cl',
+            maxCount: 1,
+        },
+    ]);
+
+    return uploadFields;
 };
 
 const safeHandler = (handler) => async (req, res, next) => {
