@@ -9,13 +9,20 @@ const userService = (data, config) => {
         };
     };
 
-    const generateToken = (user) => {
-        return jwt.sign({
-            user: user,
-        }, config.passport.secret, {
-            // expiresIn: '0'
-            issuer: 'comet-api',
-        });
+    const generateToken = (user, expire) => {
+        return !expire ?
+            jwt.sign({
+                user: user,
+            }, config.passport.secret, {
+                // expiresIn: '0'
+                issuer: 'comet-api',
+            }) :
+            jwt.sign({
+                user: user,
+            }, config.passport.secret, {
+                expiresIn: '2h',
+                issuer: 'comet-api',
+            });
     };
 
 
@@ -33,9 +40,9 @@ const userService = (data, config) => {
         return data.user.getOne(options);
     };
 
-    const login = (user) => {
+    const login = (user, rememberMe) => {
         const tokenUser = setUserInfo(user);
-        return generateToken(tokenUser);
+        return generateToken(tokenUser, rememberMe);
     };
 
     const register = async (email, password) => {

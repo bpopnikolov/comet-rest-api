@@ -14,10 +14,12 @@ module.exports.login = {
         UserService,
     }) => middlewares.safeHandler(async (req, res, next) => {
         const user = req.user;
+        const rememberMe = req.body.rememberMe;
+        console.log(rememberMe);
         let token = null;
 
         if (user) {
-            token = UserService.login(user);
+            token = UserService.login(user, rememberMe);
         }
 
         if (token) {
