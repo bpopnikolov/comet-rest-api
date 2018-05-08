@@ -25,5 +25,4 @@ const seedCategories = async () => {
     return await Category.insertMany(data);
 };
 
-seedCategories();
 module.exports = seedCategories;

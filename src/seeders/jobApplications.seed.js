@@ -97,10 +97,8 @@ const seedApplications = async () => {
     }));
 
     await Promise.all([updatedJobs, updatedUsers]);
-    console.log('all updated');
 
     return apps;
 };
 
-seedApplications();
 module.exports = seedApplications;

@@ -15,7 +15,11 @@ module.exports.login = {
     }) => middlewares.safeHandler(async (req, res, next) => {
         const user = req.user;
         const rememberMe = req.body.rememberMe;
-        console.log(rememberMe);
+
+        if (user.error) {
+            return res.status(401).json(user.error);
+        }
+
         let token = null;
 
         if (user) {
@@ -27,9 +31,6 @@ module.exports.login = {
                 token,
             });
         }
-        return res.status(401).json({
-            error: 'Login failed',
-        });
     }),
 };
 
@@ -46,23 +47,17 @@ module.exports.register = {
         } = req.body;
 
         if (!email) {
-            return res.status(422).send({
-                error: 'You must enter an email address',
-            });
+            return res.status(422).send('You must enter an email address');
         }
 
         if (!password) {
-            return res.status(422).send({
-                error: 'You must enter a password',
-            });
+            return res.status(422).send('You must enter a password');
         }
         const user = await UserService.register(email, password);
 
 
         if (!user) {
-            return res.status(422).send({
-                error: 'That email address is already in use',
-            });
+            return res.status(422).send('That email address is already in use');
         }
 
         const userInfo = UserService.setUserInfo(user);

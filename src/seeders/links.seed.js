@@ -45,5 +45,4 @@ const seedLinks = async () => {
     return await Link.insertMany(data);
 };
 
-seedLinks();
 module.exports = seedLinks;

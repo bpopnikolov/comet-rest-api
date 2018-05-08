@@ -35,5 +35,4 @@ const seedContacts = async () => {
     return await Contact.insertMany(data);
 };
 
-seedContacts();
 module.exports = seedContacts;

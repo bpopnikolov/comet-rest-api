@@ -66,6 +66,4 @@ const seedUsers = async () => {
         return User.create(user);
     }));
 };
-seedUsers();
-
 module.exports = seedUsers;

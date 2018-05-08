@@ -179,5 +179,4 @@ const jobadsLinks = async () => {
     return await JobAd.insertMany(data);
 };
 
-jobadsLinks();
 module.exports = jobadsLinks;

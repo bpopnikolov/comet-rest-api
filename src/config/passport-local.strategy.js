@@ -5,16 +5,18 @@ const localStrategy = (options, UserService) => {
         const user = await UserService.getUser({
             email,
         });
-        console.log(email);
-        console.log(user);
         if (!user) {
-            return done(null, null);
+            return done(null, {
+                error: 'There is no such a user',
+            });
         }
 
         const isMatch = await user.comparePassword(password);
 
         if (!isMatch) {
-            return done(null, null);
+            return done(null, {
+                error: 'Wrong email or password!',
+            });
         }
 
         return done(null, user);
